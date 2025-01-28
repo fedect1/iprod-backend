@@ -1,0 +1,116 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Status {
+  lineLine: Int!
+  lineId: String!
+  lineName: String!
+  lineShort: String!
+  lineType: Int!
+  lineNdos: Int!
+  lineColour: String!
+}
+
+type Order {
+  idwebmip: Int!
+  number: String!
+  position: Int!
+  article: String
+  recipe: String
+  system: Int!
+  extruder: String
+  datetime: DateTime!
+  status: Float!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Line {
+  lineLine: Int!
+  lineId: Int!
+  lineName: String!
+  lineShort: String
+  lineRefNam: String
+  lineType: Int
+  lineStandort: Int
+  lineGroup: Int
+  lineNext: Int
+  lineNdos: Int
+  lineColour: Int!
+  lineMinTpt: Int
+  lineMaxTpt: Int
+  lineMaxAbv: Int
+  lineMinWid: Int
+  lineMaxWid: Int
+}
+
+type Rawmat {
+  rawmatId: Int!
+  name: String!
+  short: String
+  rawtyp: Int
+  producer: Int
+  density: Float
+  bulkDensity: Float
+  mfival: Float
+  color: Int
+  vipIdx: Int
+  artn: String
+  noVip: Boolean!
+}
+
+type Recipe {
+  recipeId: Int!
+  repznrUni: String
+  layer: String
+  layerProportion: Float
+  repznrMat: String
+  component: Int
+  material: String
+  materialId: String
+  density: Float
+  materialProportion: Float
+  rohstoff: String
+  rawmat: Rawmat
+}
+
+type Material {
+  rawmatKey: Int!
+  rawmatName: String
+  rawmatShort: String
+  rawmatTyp: Int
+  rawmatProducer: Int
+  rawmatDensity: Float
+  rawmatBulkdens: Int
+  rawmatMFinal: Float
+  rawmatColor: Int
+  rawmatArtn: String
+}
+
+type LayerGroup {
+  layer: String!
+  layerProportion: Float
+  repznrMat: String
+  recipes: [Recipe]
+}
+
+type GropuedRecipe {
+  repznrUni: String!
+  layers: [LayerGroup]
+}
+
+type Query {
+  LINE: [Status!]!
+  ORDER: [Order!]!
+  orderOffset(page: Int! = 1, pageSize: Int! = 10): [Order!]!
+  getLines: [Line!]!
+  getRecipes(page: Int! = 1, pageSize: Int! = 10): [Recipe!]!
+  getAllMaterial: [Material!]!
+  uniqueRecipes: [String!]!
+  getRecipesId(reciptNumber: String!): [Recipe!]!
+  getRecipeSortedByLayer(reciptNumber: String!): GropuedRecipe!
+}
