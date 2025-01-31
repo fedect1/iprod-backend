@@ -9,9 +9,9 @@ export class Order {
   @Field(() => Int)
   idwebmip: number;
 
-  @Column({ name: 'ORDER_AVID', type: 'varchar',length: 20, nullable: true })
-   @Field()
-  number: string;
+  @Column({ name: 'ORDER_SYSTEM', type: 'int' })
+   @Field(() => Int)
+  number: number;
 
   @Column({ name: 'ORDER_POSITION', type: 'tinyint', nullable: true })
   @Field( () => Int)

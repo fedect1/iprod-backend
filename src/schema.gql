@@ -14,7 +14,7 @@ type Status {
 
 type Order {
   idwebmip: Int!
-  number: String!
+  number: Int!
   position: Int!
   article: String
   recipe: String
@@ -106,11 +106,26 @@ type GropuedRecipe {
 type Query {
   LINE: [Status!]!
   ORDER: [Order!]!
-  orderOffset(page: Int! = 1, pageSize: Int! = 10): [Order!]!
+  orderOffset(page: Int, pageSize: Int): [Order!]!
   getLines: [Line!]!
   getRecipes(page: Int! = 1, pageSize: Int! = 10): [Recipe!]!
   getAllMaterial: [Material!]!
   uniqueRecipes: [String!]!
   getRecipesId(reciptNumber: String!): [Recipe!]!
   getRecipeSortedByLayer(reciptNumber: String!): GropuedRecipe!
+}
+
+type Mutation {
+  createMaterial(createMaterialInput: CreateMaterialInput!): Material!
+}
+
+input CreateMaterialInput {
+  rawmatKey: Int!
+  rawmatName: String
+  rawmatShort: String
+  rawmatTyp: Int
+  rawmatDensity: Float
+  rawmatBulkdens: Int
+  rawmatMFinal: Float
+  rawmatColor: Int
 }
